@@ -1,0 +1,54 @@
+﻿@model List<LabCoreD02.Models.Employee>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <a asp-action="create">create new employee</a>
+    <table class="table tab-content" border="1">
+
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Salary</th>
+            <th>Department</th>
+            <th>Delete</th>
+            <th>Update</th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>@item.id</td>
+        <td>@item.name</td>
+        <td>@item.age</td>
+        <td>@item.address</td>
+        <td>@item.salary</td>
+        @if (item.departments != null)
+        {
+            <td>@item.departments.dept_name</td>
+        }
+        else
+        {
+            <td></td>
+        }
+        <td><a asp-action="delete" asp-route-id="@item.id" style="color:red" onclick="return confirm('are you sure delete employee @item.name ?')">delete</a></td>
+        <td><a asp-action="update" asp-route-id="@item.id" style="color:green">update</a></td>
+
+
+    </tr>
+        }
+
+    </table>
+</body>
+</html>
